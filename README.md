@@ -44,7 +44,7 @@ The bundle inserts one row:
 3. Sign in inside **that** window. The session is stored in the plugin's own profile (`~/.dsh/chatgpt-web/chrome-profile`), not in your daily browser.
 4. Send again.
 
-The dedicated browser starts on demand and is **re-launched automatically** if you close it (verified: a killed browser is back and answering within ~19 s).
+The dedicated browser starts on demand **in the background** (macOS: `open -g -j`) and is **re-launched automatically** if you close it, without stealing focus from the window you are working in. The one exception is a sign-in prompt: the plugin then moves the window on screen and activates it, because you cannot type into a login page you cannot see.
 
 ### Configuration
 
@@ -56,7 +56,7 @@ The dedicated browser starts on demand and is **re-launched automatically** if y
 | `chromePath` | Google Chrome (macOS path) | Browser executable |
 | `userDataDir` | `~/.dsh/chatgpt-web/chrome-profile` | Dedicated browser profile (login lives here) |
 | `debuggingPort` | `9333` | CDP port for the dedicated browser |
-| `windowMode` | `hidden` | `visible` / `hidden` (window moved off-screen) / `headless` (blocked by ChatGPT — not recommended) |
+| `windowMode` | `hidden` | `visible` / `hidden` (window moved off-screen, launched in the background) / `headless` (blocked by ChatGPT — not recommended) |
 | `temporaryChat` | `true` | Use a temporary chat each call, so nothing is written to your ChatGPT history |
 | `reasoningEffort` | `high` | Aligns the web "thinking effort" slider before every call (`low` / `medium` / `high`) |
 | `webModel` | empty | Optionally force a web model such as `GPT-6`; empty keeps the page's current pick |
@@ -119,7 +119,7 @@ dsh plugin --profile <name> add /absolute/path/to/dsh-llm-chatgpt-web
 3. 在**那个**窗口里登录（账号密码或 Google 都行），登录态存在插件自己的 profile 里。
 4. 回来再发一次。
 
-浏览器是**按需启动**的：你手动关掉它，下一次调用会自动重新拉起（实测约 19 秒恢复）。
+浏览器是**后台按需启动**的（macOS 用 `open -g -j`），不会抢你正在用的窗口的焦点；你手动关掉它也会自动重新拉起。唯一例外是**需要登录**：这时插件会把窗口挪回屏幕内并激活，否则你看不见登录页。
 
 ### 已知限制
 
