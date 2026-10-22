@@ -57,7 +57,8 @@ The dedicated browser starts on demand **in the background** (macOS: `open -g -j
 | `userDataDir` | `~/.dsh/chatgpt-web/chrome-profile` | Dedicated browser profile (login lives here) |
 | `debuggingPort` | `9333` | CDP port for the dedicated browser |
 | `windowMode` | `hidden` | `visible` / `hidden` (window moved off-screen, launched in the background) / `headless` (blocked by ChatGPT — not recommended) |
-| `temporaryChat` | `true` | Use a temporary chat each call, so nothing is written to your ChatGPT history |
+| `temporaryChat` | `true` | Use a temporary chat (not written to your ChatGPT history) |
+| `conversationMode` | `continue` | `continue` = keep one temporary chat per DSH session and send only deltas; `fresh` = new chat each call |
 | `reasoningEffort` | `high` | Aligns the web "thinking effort" slider before every call (`low` / `medium` / `high`) |
 | `webModel` | empty | Optionally force a web model such as `GPT-6`; empty keeps the page's current pick |
 | `maxPromptChars` | `60000` | Prompt budget in characters |
@@ -76,6 +77,7 @@ and translates it into a real DSH `tool-call`; the tool result is pasted back in
 
 ### Known limitations
 
+- **One conversation per session**: the first call opens a temporary chat; later calls in the same DSH session continue in that same chat and send only the delta (new user turns / tool results), so the web side keeps the context. Set `conversationMode: fresh` to always start over.
 - **Serial**: one browser tab, so model calls queue.
 - **Every turn re-sends the task + tools + recent history** (temporary chat means no server-side carry-over). Each step takes roughly 10–40 s with `reasoningEffort=high`.
 - **Text only**: images are not forwarded.
@@ -123,6 +125,7 @@ dsh plugin --profile <name> add /absolute/path/to/dsh-llm-chatgpt-web
 
 ### 已知限制
 
+- **同一会话只开一条临时对话**：第一次调用建会话，之后继续在同一条里说，只发增量（新的用户消息 / 工具结果），上下文交给网页端维护；`conversationMode: fresh` 可恢复每轮新建。
 - 单浏览器标签，调用串行排队。
 - 每轮都要重新贴「任务 + 工具 + 最近记录」（用临时对话，不污染历史），`reasoningEffort=high` 时一步通常 10–40 秒。
 - 暂不支持图片输入。

@@ -30,6 +30,8 @@ export const Config = z.object({
   windowMode: z.string().default('hidden'),
   logDir: z.string().default('~/.dsh/chatgpt-web/logs'),
   temporaryChat: z.boolean().default(true),
+  /** continue = 同一 DSH 会话内沿用一条临时对话、只发增量；fresh = 每轮新建 */
+  conversationMode: z.string().default('continue'),
   /** 每次调用前把网页端「思考强度」对齐到这个档位：low / medium / high（默认 high） */
   reasoningEffort: z.string().default('high'),
   /** 每次调用前把网页端模型切换到这个（例如 GPT-6 / GPT-5.6 Sol）；空串表示保持页面上的选择 */
@@ -90,6 +92,7 @@ function readConfig(config) {
     windowMode: String(field('windowMode', 'hidden')),
     logDir: String(field('logDir', '~/.dsh/chatgpt-web/logs')),
     temporaryChat: Boolean(field('temporaryChat', true)),
+    conversationMode: String(field('conversationMode', 'continue')),
     reasoningEffort: String(field('reasoningEffort', 'high')),
     webModel: String(field('webModel', '')).trim(),
     contextWindow: Number(field('contextWindow', 128000)),
