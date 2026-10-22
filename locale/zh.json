@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "ChatGPT 网页版模型",
+    "description": "用本地 Chrome 驱动 chatgpt.com 网页端，把网页额度接成 DSH 模型路由（首次使用需登录一次）。"
+  }
+}

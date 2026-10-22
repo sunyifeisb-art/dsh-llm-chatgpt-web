@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "ChatGPT Web Provider",
+    "description": "Drives chatgpt.com in a local Chrome via CDP and exposes the ChatGPT web quota as a DSH model route."
+  }
+}

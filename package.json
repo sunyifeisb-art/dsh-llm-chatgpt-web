@@ -1,0 +1,60 @@
+{
+  "name": "dsh-llm-chatgpt-web",
+  "version": "0.1.4",
+  "private": true,
+  "type": "module",
+  "description": "ChatGPT Web (chatgpt.com) model provider for DeepSeek Harness — drives your logged-in browser session, so it spends the ChatGPT web quota instead of Codex quota.",
+  "main": "index.js",
+  "exports": {
+    ".": "./index.js",
+    "./cordis.patch.yml": "./cordis.patch.yml",
+    "./locale/*.json": "./locale/*.json",
+    "./icon": "./icon.svg"
+  },
+  "files": [
+    "index.js",
+    "lib/*.js",
+    "cordis.patch.yml",
+    "locale/*.json",
+    "icon.svg",
+    "README.md",
+    "scripts/*.mjs"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "*",
+    "@deepseek-ai/dsh-llm": "*",
+    "@deepseek-ai/schemastery": "*"
+  },
+  "peerDependenciesMeta": {
+    "@deepseek-ai/schemastery": {
+      "optional": true
+    }
+  },
+  "scripts": {
+    "test": "node scripts/test-transcript.mjs"
+  },
+  "license": "MIT",
+  "keywords": [
+    "dsh-plugin",
+    "deepseek-harness",
+    "dsh",
+    "chatgpt",
+    "chatgpt-web",
+    "model-provider",
+    "cdp"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sunyifeisb-art/dsh-llm-chatgpt-web.git"
+  },
+  "homepage": "https://github.com/sunyifeisb-art/dsh-llm-chatgpt-web#readme",
+  "bugs": {
+    "url": "https://github.com/sunyifeisb-art/dsh-llm-chatgpt-web/issues"
+  },
+  "author": "sunyifeisb-art"
+}

@@ -1,0 +1,26 @@
+# dsh-llm-chatgpt-web：把 ChatGPT 网页端接成 DSH 的模型路由。
+# 装进 profile 后，DSH 会插入这一行插件；行 id 同时作为 settingsNs。
+- insert:
+    - id: llm-chatgpt-web
+      name: 'dsh-llm-chatgpt-web'
+      config:
+        provider: chatgpt-web
+        displayName: ChatGPT 网页版
+        transport: web            # web = 真实浏览器驱动；fake = 不联网自检
+        chromePath: /Applications/Google Chrome.app/Contents/MacOS/Google Chrome
+        userDataDir: ~/.dsh/chatgpt-web/chrome-profile
+        debuggingPort: 9333
+        logDir: ~/.dsh/chatgpt-web/logs
+        temporaryChat: true       # 用临时对话，不污染 ChatGPT 历史记录
+        reasoningEffort: high     # 每次调用前把「思考强度」对齐到 low / medium / high
+        webModel: ''              # 每次调用前切换网页端模型（如 GPT-6）；空串=保持页面选择
+        contextWindow: 128000
+        defaultMaxTokens: 8192
+        maxPromptChars: 90000
+        emulateTools: true        # 用 @@TOOL@@ 文本协议模拟工具调用
+        pollIntervalMs: 250
+        responseTimeoutMs: 600000
+        idleFinishMs: 6000
+        models:
+          - id: chatgpt-web
+            name: ChatGPT 网页（网页额度）
