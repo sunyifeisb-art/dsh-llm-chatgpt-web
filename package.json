@@ -1,6 +1,6 @@
 {
   "name": "dsh-llm-chatgpt-web",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "private": true,
   "type": "module",
   "description": "ChatGPT Web (chatgpt.com) model provider for DeepSeek Harness — drives your logged-in browser session, so it spends the ChatGPT web quota instead of Codex quota.",
